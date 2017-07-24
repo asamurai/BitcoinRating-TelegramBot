@@ -1,0 +1,1 @@
+module.exports.promisify = require('./promisify.js');

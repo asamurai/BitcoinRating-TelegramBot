@@ -1,0 +1,11 @@
+# IntelliJ
+*.ipr
+*.iml
+*.iws
+.idea/
+
+node_modules/
+config/config.prod.json
+npm-debug.log
+package-lock.json
+yarn.lock

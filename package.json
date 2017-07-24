@@ -1,0 +1,21 @@
+{
+  "name": "telegram-bitcoin-raiting-bot",
+  "version": "1.0.0",
+  "description": "Telegram bot for checking bitcoin raiting.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=dev nodemon .",
+    "prod": "cross-env NODE_ENV=prod nodemon .",
+    "test": "cross-env NODE_ENV=test jest"
+  },
+  "author": "Artem Vergun",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "cross-env": "^5.0.1",
+    "jest": "^20.0.4",
+    "node-telegram-bot-api": "^0.27.1",
+    "nodemon": "^1.11.0",
+    "request": "^2.81.0"
+  }
+}
