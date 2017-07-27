@@ -1,6 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api');
 const config = require(`${process.cwd()}/config`).bot;
-const {promisify, createApiPath, filterCommands, checkCurrency, getCurrency, checkToday, checkYesterday, checkPeriod, getPeriod} = require(`${process.cwd()}/utils`);
+const {promisify, createApiPath, filterCommands, checkCurrency, getCurrency, checkToday, checkYesterday, checkPeriod, getPeriod, todayHandler, yesterdayHandler, periodHandler} = require(`${process.cwd()}/utils`);
 const bot = new TelegramBot(config.token, {polling: config.polling});
 
 bot.on('message', (msg) => {
@@ -32,30 +32,50 @@ bot.on('message', (msg) => {
         isApiCall = true;
     }
     if(checkCurrency(commands)){
+        if(!options.today){
+            options.today = true;
+        }
         options.currency = getCurrency(commands);
         isCommandChecked = true;
         isApiCall = true;
     }
+    if(/^#start/.test(msg.text) && !isCommandChecked){
+        //send message about bot
+        console.log('start')
+        isCommandChecked = true;
+    }
+    if(/^#commands/.test(msg.text) && !isCommandChecked){
+        //send message about main commands
+        console.log('commands');
+        isCommandChecked = true;
+    } 
     if(!isCommandChecked){
-        //send message that this command is not available
+        console.log('nothing checked');
     }else{
         if(isApiCall){
-            promisify(createApiPath(options))
+            const request = createApiPath(options);
+            const chatId = msg.chat.id;
+            promisify(request.apiPath)
                 .then((res)=>{
-                    //return nice viewed response
+                    const data = {res: JSON.parse(res), currency_code: request.currency};
+                    switch (request.type) {
+                        case 'today':
+                            bot.sendMessage(chatId, todayHandler(data));
+                            break;
+                        case 'yesterday':
+                            bot.sendMessage(chatId, yesterdayHandler(data));
+                            break;
+                        case 'period':
+                            bot.sendMessage(chatId, periodHandler(data));
+                            break;
+                        default:
+                            // statements_def
+                            break;
+                    }
                 })
                 .catch((error)=>{
-                    //send error message
+                    console.log(error);
                 })
-        }else{
-            if(/^#start/.test(el)){
-                //send message about bot
-                isCommandChecked = true;
-            }
-            if(/^#commands/.test(el)){
-                //send message about main commands
-                isCommandChecked = true;
-            }           
         }
     }
 });
