@@ -1,11 +1,14 @@
 const TelegramBot = require('node-telegram-bot-api');
 const config = require(`${process.cwd()}/config`).bot;
-const {promisify, createApiPath, filters,responseHandler, botListenerHandler} = require(`${process.cwd()}/utils`);
 const bot = new TelegramBot(config.token, {polling: config.polling});
+
+const {promisify, createApiPath, filters,responseHandler, botListenerHandler} = require(`${process.cwd()}/utils`);
+const {filterCommands, checkToday, checkYesterday, checkPeriod, getPeriod, checkCurrency, getCurrency} = filters;
+const {staticErrorHandler, todayHandler, yesterdayHandler, periodHandler, staticMessageHandler, commandsHandler} = responseHandler;
 const {sendMessage} = botListenerHandler;
 
 bot.on('message', (msg) => {
-    const commands = filters.filterCommands(msg.text);
+    const commands = filterCommands(msg.text);
     let isCommandChecked = false;
     let isApiCall = false;
     const options = {
@@ -16,18 +19,18 @@ bot.on('message', (msg) => {
         end: null
     };
     switch (true) {
-        case filters.checkToday(commands):
+        case checkToday(commands):
             options.today = true;
             isCommandChecked = true;
             isApiCall = true;            
             break;
-        case filters.checkYesterday(commands):
+        case checkYesterday(commands):
             options.yesterday = true;
             isCommandChecked = true;
             isApiCall = true;          
             break;
-        case filters.checkPeriod(commands):
-            const date = filters.getPeriod(commands);
+        case checkPeriod(commands):
+            const date = getPeriod(commands);
             options.start = date.start;
             options.end = date.end;
             isCommandChecked = true;
@@ -36,11 +39,11 @@ bot.on('message', (msg) => {
         default:
             break;
     }
-    if (filters.checkCurrency(commands)){
+    if (checkCurrency(commands)){
         if (!options.today && !options.yesterday && !options.start && !options.end){
             options.today = true;
         }
-        options.currency = filters.getCurrency(commands);
+        options.currency = getCurrency(commands);
         isCommandChecked = true;
         isApiCall = true;
     }
@@ -48,13 +51,13 @@ bot.on('message', (msg) => {
         const chatId = msg.chat.id;
         switch (true) {
             case /^\/start$/.test(msg.text):
-                sendMessage(bot, chatId, responseHandler.staticMessageHandler('start'));
+                sendMessage(bot, chatId, staticMessageHandler('start'));
                 break;
             case /^\/commands$/.test(msg.text):
-                sendMessage(bot, chatId, responseHandler.commandsHandler());
+                sendMessage(bot, chatId, commandsHandler());
                 break;       
             default:
-                sendMessage(bot, chatId, responseHandler.staticErrorHandler('undefined_command'));
+                sendMessage(bot, chatId, staticErrorHandler('undefined_command'));
                 break;
         }
     }else{
@@ -66,21 +69,21 @@ bot.on('message', (msg) => {
                     const data = {res: JSON.parse(res), currencyCode: request.currency};
                     switch (request.type) {
                     case 'today':
-                        sendMessage(bot, chatId, responseHandler.todayHandler(data));
+                        sendMessage(bot, chatId, todayHandler(data));
                         break;
                     case 'yesterday':
-                        sendMessage(bot, chatId, responseHandler.yesterdayHandler(data));
+                        sendMessage(bot, chatId, yesterdayHandler(data));
                         break;
                     case 'period':
-                        sendMessage(bot, chatId, responseHandler.periodHandler(data));
+                        sendMessage(bot, chatId, periodHandler(data));
                         break;
                     default:
-                        sendMessage(bot, chatId, responseHandler.staticErrorHandler('undefined_command'));
+                        sendMessage(bot, chatId, staticErrorHandler('undefined_command'));
                         break;
                     }
                 })
                 .catch((error)=>{
-                    bot.sendMessage(chatId, responseHandler.staticErrorHandler(error.code));
+                    bot.sendMessage(chatId, staticErrorHandler(error.code));
                 });
         }
     }
