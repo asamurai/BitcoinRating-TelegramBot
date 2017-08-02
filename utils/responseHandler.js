@@ -39,13 +39,12 @@ module.exports.periodHandler = (body) => {
  */
 
 module.exports.staticMessageHandler = (command) => {
-    const message = commandMessages[command];
+    const message = commandMessages[command] ? commandMessages[command] : errorsMessages['undefined_error'];
     return message.message;
 };
 
 module.exports.commandsHandler = () => {
-    const messages = commandMessages;
-    let response = Object.values(messages).filter(el=>el.show).map(el=>`${el.commands} - ${el.description}`).join(`\n`);
+    let response = Object.values(commandMessages).filter(el=>el.show).map(el=>`${el.commands} - ${el.description}`).join(`\n`);
     response = `Bot command list: \n${response}`;
     return response;
 };
