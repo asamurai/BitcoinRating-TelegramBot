@@ -1,7 +1,8 @@
 const TelegramBot = require('node-telegram-bot-api');
 const config = require(`${process.cwd()}/config`).bot;
-const {promisify, createApiPath, filters,responseHandler} = require(`${process.cwd()}/utils`);
+const {promisify, createApiPath, filters,responseHandler, botListenerHandler} = require(`${process.cwd()}/utils`);
 const bot = new TelegramBot(config.token, {polling: config.polling});
+const {sendMessage} = botListenerHandler;
 
 bot.on('message', (msg) => {
     const commands = filters.filterCommands(msg.text);
@@ -46,14 +47,14 @@ bot.on('message', (msg) => {
     if (!isCommandChecked){
         const chatId = msg.chat.id;
         switch (true) {
-            case /^\/start/.test(msg.text):
-                bot.sendMessage(chatId, responseHandler.staticMessageHandler('start'));
+            case /^\/start$/.test(msg.text):
+                sendMessage(bot, chatId, responseHandler.staticMessageHandler('start'));
                 break;
-            case /^\/commands/.test(msg.text):
-                bot.sendMessage(chatId, responseHandler.commandsHandler());
+            case /^\/commands$/.test(msg.text):
+                sendMessage(bot, chatId, responseHandler.commandsHandler());
                 break;       
             default:
-                bot.sendMessage(chatId, responseHandler.staticErrorHandler('undefined_command'));
+                sendMessage(bot, chatId, responseHandler.staticErrorHandler('undefined_command'));
                 break;
         }
     }else{
@@ -65,16 +66,16 @@ bot.on('message', (msg) => {
                     const data = {res: JSON.parse(res), currencyCode: request.currency};
                     switch (request.type) {
                     case 'today':
-                        bot.sendMessage(chatId, responseHandler.todayHandler(data));
+                        sendMessage(bot, chatId, responseHandler.todayHandler(data));
                         break;
                     case 'yesterday':
-                        bot.sendMessage(chatId, responseHandler.yesterdayHandler(data));
+                        sendMessage(bot, chatId, responseHandler.yesterdayHandler(data));
                         break;
                     case 'period':
-                        bot.sendMessage(chatId, responseHandler.periodHandler(data));
+                        sendMessage(bot, chatId, responseHandler.periodHandler(data));
                         break;
                     default:
-                        bot.sendMessage(chatId, responseHandler.staticErrorHandler('undefined_command'));
+                        sendMessage(bot, chatId, responseHandler.staticErrorHandler('undefined_command'));
                         break;
                     }
                 })
