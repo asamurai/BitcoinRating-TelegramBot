@@ -37,7 +37,7 @@ bot.on('message', (msg) => {
             break;
     }
     if (filters.checkCurrency(commands)){
-        if (!options.today &&  !options.yesterday && !options.start && !options.end){
+        if (!options.today && !options.yesterday && !options.start && !options.end){
             options.today = true;
         }
         options.currency = filters.getCurrency(commands);
