@@ -3,6 +3,7 @@
 *.iml
 *.iws
 .idea/
+.vscode/
 
 node_modules/
 config/config.prod.json
