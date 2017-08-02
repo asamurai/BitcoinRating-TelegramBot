@@ -1,0 +1,22 @@
+{
+    "undefined_error":{
+        "code": "undefined_error",
+        "message": "Undefined error occured, please repeat command."
+    },
+    "undefined_command":{
+        "code": "undefined_command",
+        "message": "I don't know this command, please read list of commands i know /commands ."
+    },
+    "EFATAL": {
+        "code": "EFATAL",
+        "message": "Fatal error occured."
+    },
+    "EPARSE": {
+        "code": "EPARSE",
+        "message": "Response message cannot be parsed, please repeat command."
+    },
+    "ETELEGRAM":{
+        "code": "ETELEGRAM", 
+        "message": "Telegram error occured."
+    }
+}

@@ -8,6 +8,6 @@ module.exports = (url) => {
                 reject(error);
             }
             resolve(body);
-        })
-    })
+        });
+    });
 };

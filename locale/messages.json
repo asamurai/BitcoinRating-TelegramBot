@@ -1,0 +1,38 @@
+{
+    "start":{
+        "show": true,
+        "commands": "/start",
+        "message": "Hello, this is Bitcoin raiting bot, i'll give provide you with information about bitcoin rating for different times and different currency. To know bot options please type command /commands",
+        "description": "Information about Bot."
+    },
+    "commands":{
+        "show": true,
+        "commands": "/commands",
+        "description": "Available options and commands for bot.",
+        "message": ""
+    },
+    "today": {
+        "show": true,
+        "commands": "/today",
+        "description": "Shows you bitcoin price for today. Default currency is USD.",
+        "message": ""
+    },
+    "yesterday": {
+        "show": true,
+        "commands": "/yesterday",
+        "description": "Shows you bitcoin price for yesterday. Default currency is USD.",
+        "message": ""
+    },
+    "period": {
+        "show": true,
+        "commands": "/start=YYYY:MM:DD /end=YYYY:MM:DD",
+        "description": "Shows you bitcoin price for yesterday. Default currency is USD.",
+        "message": ""
+    },  
+    "currency": {
+        "show": true,
+        "commands": "/currency=<CURRENCY>",
+        "description": "Shows you bitcoin price for selected currency. Just put your currency insted of '<CURRENCY>'. You can combine this option with other any date option. Default date is today date.",
+        "message": ""
+    }
+}

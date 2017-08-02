@@ -1,0 +1,28 @@
+{
+    "extends": "eslint:recommended",
+    "parserOptions":{
+        "ecmaFeatures":{
+            "jsx":true
+        },
+        "sourceType":"module"
+    },
+	"env": {
+		"browser": true,
+		"node": true,
+		"es6": true
+	},
+	"rules": {
+		"eol-last": 1, 
+		"no-console": 0, 
+		"no-var": 2, 
+		"semi": 1,
+		"no-else-return": 2,
+		"no-mixed-spaces-and-tabs": 1,
+		"no-unreachable": 2,
+		"no-multi-spaces": 1,
+		"no-throw-literal": 2,
+		"no-underscore-dangle": 0,
+		"strict": [2, "global"],
+		"no-case-declarations": 0
+	}
+}
