@@ -1,4 +1,4 @@
-module.exports = (object) => {
+module.exports = (object = {currency: 'USD'}) => {
     const response = {};
     let type, apiPath,
         currency = object.currency;
@@ -16,6 +16,10 @@ module.exports = (object) => {
     if(object.start && object.end){
         apiPath = `${apiPath}&start=${object.start}&end=${object.end}`;
         type = 'period';
+    }
+    if(!apiPath){
+        apiPath = `https://api.coindesk.com/v1/bpi/currentprice/${currency}.json`;
+        type = 'today';       
     }
     response.apiPath = apiPath;
     response.type = type;

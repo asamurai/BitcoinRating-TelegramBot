@@ -11,6 +11,9 @@
 		"node": true,
 		"es6": true
 	},
+	"plugins": [
+		"jest"
+	],
 	"rules": {
 		"eol-last": 1, 
 		"no-console": 0, 
@@ -23,6 +26,7 @@
 		"no-throw-literal": 2,
 		"no-underscore-dangle": 0,
 		"strict": [2, "global"],
-		"no-case-declarations": 0
+		"no-case-declarations": 0,
+		"no-undef": 0
 	}
 }
