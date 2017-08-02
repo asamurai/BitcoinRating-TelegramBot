@@ -13,12 +13,12 @@ module.exports.getCurrency = (array) => {
 
 //check today
 module.exports.checkToday = (array) => {
-    return !!array.filter(el=>/^\/today/.test(el)).length;
+    return !!array.filter(el=>/^\/today$/.test(el)).length;
 };
 
 //check yestarday
 module.exports.checkYesterday = (array) => {
-    return !!array.filter(el=>/^\/yesterday/.test(el)).length;
+    return !!array.filter(el=>/^\/yesterday$/.test(el)).length;
 };
 
 //check period

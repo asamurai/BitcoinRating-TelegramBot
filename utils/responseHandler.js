@@ -55,6 +55,6 @@ module.exports.commandsHandler = () => {
  */
 
  module.exports.staticErrorHandler = (code = 'undefined_error') => {
-     const error = errorsMessages[code];
+     const error = errorsMessages[code] ? errorsMessages[code] : errorsMessages['undefined_error'];
      return error.message;
  }
