@@ -1,5 +1,5 @@
-module.exports.filterCommands = (msg) => {
-    return msg.split(' ').filter(el=>/^\//.test(el));
+module.exports.filterCommands = (msg = '') => {
+    return msg.replace(/\s{1,}/,' ').split(' ').filter(el=>/^\//.test(el));
 };
 //check currency
 module.exports.checkCurrency = (array) => {
@@ -23,7 +23,9 @@ module.exports.checkYesterday = (array) => {
 
 //check period
 module.exports.checkPeriod = (array) => {
-    return (!!array.filter(el=>/^\/start/.test(el)).length && !!array.filter(el=>/^\/end/.test(el)).length);
+    const isStart = !!array.filter(el=>/^\/start=/.test(el)).length,
+    isEnd = !!array.filter(el=>/^\/end=/.test(el)).length;
+    return isStart && isEnd;
 };
 
 //get period
