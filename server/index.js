@@ -64,6 +64,7 @@ bot.on('message', (msg) => {
         if (isApiCall){
             const request = createApiPath(options);
             const chatId = msg.chat.id;
+            console.log(request);
             promisify(request.apiPath)
                 .then((res)=>{
                     const data = {res: JSON.parse(res), currencyCode: request.currency};
@@ -72,6 +73,7 @@ bot.on('message', (msg) => {
                         sendMessage(bot, chatId, todayHandler(data));
                         break;
                     case 'yesterday':
+                        console.log('yesterday start');
                         sendMessage(bot, chatId, yesterdayHandler(data));
                         break;
                     case 'period':
