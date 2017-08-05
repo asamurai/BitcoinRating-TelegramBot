@@ -2,8 +2,6 @@ const bot = require('./server');
 const express = require('express');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 8080;
-//const {dailyCron} = require('./server/cronjob.js');
-//dailyCron(bot).start();
 
 const app = express();
 app.use(bodyParser.json());
