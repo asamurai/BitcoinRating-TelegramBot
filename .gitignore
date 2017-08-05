@@ -6,11 +6,6 @@
 # vscode
 .vscode/
 
-# config hidding
-config/config.prod.json
-config/config.dev.json
-config/config.test.json
-
 node_modules/
 npm-debug.log
 package-lock.json

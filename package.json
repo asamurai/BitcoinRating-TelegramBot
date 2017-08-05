@@ -10,11 +10,16 @@
   },
   "author": "Artem Vergun",
   "license": "ISC",
+  "engines":{
+    "node": "7.10.1"
+  },
   "dependencies": {
     "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
     "cross-env": "^5.0.1",
     "eslint": "^4.3.0",
     "eslint-plugin-jest": "^20.0.3",
+    "express": "^4.15.3",
     "jest": "^20.0.4",
     "moment": "^2.18.1",
     "node-cron": "^1.2.0",
