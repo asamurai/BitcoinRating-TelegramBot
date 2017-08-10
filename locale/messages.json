@@ -2,7 +2,7 @@
     "start":{
         "show": true,
         "commands": "/start",
-        "message": "Hello, this is Bitcoin raiting bot, i'll give provide you with information about bitcoin rating for different times and different currency. To know bot options please type command /commands",
+        "message": "Hello, this is Bitcoin rating bot, i'll give provide you with information about bitcoin rating for different times and different currency. To know bot options please type command /commands",
         "description": "Information about Bot."
     },
     "commands":{
@@ -25,7 +25,7 @@
     },
     "period": {
         "show": true,
-        "commands": "/start=YYYY:MM:DD /end=YYYY:MM:DD",
+        "commands": "/start=YYYY-MM-DD /end=YYYY-MM-DD",
         "description": "Shows you bitcoin price for yesterday. Default currency is USD.",
         "message": ""
     },  

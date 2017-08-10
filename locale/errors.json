@@ -5,7 +5,7 @@
     },
     "undefined_command":{
         "code": "undefined_command",
-        "message": "I don't know this command, please read list of commands i know /commands ."
+        "message": "I don't know this command, please read list of existed commands /commands ."
     },
     "EFATAL": {
         "code": "EFATAL",
