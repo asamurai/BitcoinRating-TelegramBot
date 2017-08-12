@@ -15,17 +15,17 @@
 
 #### Demo 1
 ``/currency=EUR`` or ``/today /currency=EUR`` - Shows you bitcoin price for today, currency is euro.
-####Output:
+#### Output:
 ``For today the bitcoin price is 3125 EUR.``
 
 #### Demo 2
 ``/yesterday /currency=UAH`` - Shows you bitcoin price for yesterday, currency is ukrainian hryvna.
-####Output:
+#### Output:
 ``For yesterday the bitcoin price was 94024 UAH.``
 
 #### Demo 2
 ``/start=2017-03-03 /end=2017-03-05 /currency=USD`` - Shows you bitcoin rating for period from 2017-03-03 to 2017-03-05, currency is USD.
-####Output:
+#### Output:
 ``Bitcoin rate for period:``
 ``Mar 3rd 17 - 1291 USD``
 ``Mar 4th 17 - 1268 USD``
